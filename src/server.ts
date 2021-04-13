@@ -9,12 +9,6 @@ export async function init(
   configs: IServerConfigurations,
   database: IDatabase
 ): Promise<Server> {
-  const server: Server = new Server({
-    port: 3000,
-    host: "localhost",
-    query: { parser: (query) => qs.parse(query) },
-  });
-
   // server.route({
   //   method: "GET",
   //   path: "/",
@@ -23,12 +17,28 @@ export async function init(
   //   },
   // });
 
-  Repository.init(server, configs, database);
+  try {
+    const server: Server = new Server({
+      port: 3000,
+      host: "localhost",
+      query: { parser: (query) => qs.parse(query) },
+      routes: {
+        cors: {
+          origin: ["*"],
+        },
+      },
+    });
 
-  await server.start();
-  console.log("Server running on %s", server.info.uri);
+    Repository.init(server, configs, database);
 
-  return server;
+    await server.start();
+    console.log("Server running on %s", server.info.uri);
+
+    return server;
+  } catch (error) {
+    console.log("Error starting server: ", error);
+    throw error;
+  }
 }
 
 process.on("unhandledRejection", (err) => {
