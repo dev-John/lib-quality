@@ -2,6 +2,9 @@ import * as Hapi from "hapi";
 import RepositoryController from "./repositoryController";
 import { IDatabase } from "../../db";
 import { IServerConfigurations } from "../../config";
+import { HTTP_VERBS } from "../../constants/index";
+
+const { GET } = HTTP_VERBS;
 
 export default function (
   server: Hapi.Server,
@@ -12,7 +15,7 @@ export default function (
   server.bind(issueController);
 
   server.route({
-    method: "GET",
+    method: GET,
     path: "/get-repository",
     options: {
       handler: issueController.getRepository,

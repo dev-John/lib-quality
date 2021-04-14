@@ -1,16 +1,19 @@
-import * as Mongoose from "mongoose";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 import { IDataConfiguration } from "../config";
 import { IRepository, RepositoryModel } from "../api/repository/repository";
 
+dotenv.config();
+
 export interface IDatabase {
-  repositoryModel: Mongoose.Model<IRepository>;
+  repositoryModel: mongoose.Model<IRepository>;
 }
 
 export function init(config: IDataConfiguration): IDatabase {
-  (<any>Mongoose).Promise = Promise;
-  Mongoose.connect(process.env.MONGO_URL || config.connectionString);
+  (<any>mongoose).Promise = Promise;
+  mongoose.connect(process.env.MONGO_URL || config.connectionString);
 
-  let mongoDb = Mongoose.connection;
+  let mongoDb = mongoose.connection;
 
   mongoDb.on("error", () => {
     console.log(`Unable to connect to database: ${config.connectionString}`);

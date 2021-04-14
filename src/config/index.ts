@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 export interface IServerConfigurations {
   port: number;
   plugins: Array<string>;
@@ -12,8 +16,8 @@ export interface IDataConfiguration {
 
 export function getDatabaseConfig(): IDataConfiguration {
   return {
-    connectionString: "mongodb://URL-PROVISORIA",
-  }; // Configurar dados no .env
+    connectionString: process.env.DB_CONNECTION,
+  };
 }
 
 export function getServerConfigs(): IServerConfigurations {
