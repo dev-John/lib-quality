@@ -1,4 +1,4 @@
-import * as Hapi from "hapi";
+import { Server } from "@hapi/hapi";
 import RepositoryController from "./repositoryController";
 import { IServerConfigurations } from "../../config";
 import { HTTP_VERBS } from "../../constants/index";
@@ -6,7 +6,7 @@ import { HTTP_VERBS } from "../../constants/index";
 const { GET } = HTTP_VERBS;
 
 export default function (
-  server: Hapi.Server,
+  server: Server,
   serverConfigs: IServerConfigurations
 ) {
   const issueController = new RepositoryController(serverConfigs);
