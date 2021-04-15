@@ -5,6 +5,8 @@ export interface IRepository extends Mongoose.Document {
   issues: number;
   avgAge: number;
   stdAge: number;
+  createdAt: Date;
+  updatedAt: Date; // necessary to declare even with timestamps: true ... Ts Requirement
 }
 
 export const RepositorySchema = new Mongoose.Schema(
