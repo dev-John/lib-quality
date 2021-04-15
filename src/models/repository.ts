@@ -5,8 +5,6 @@ export interface IRepository extends Mongoose.Document {
   issues: number;
   avgAge: number;
   stdAge: number;
-  createdAt: Date;
-  updateAt: Date;
 }
 
 export const RepositorySchema = new Mongoose.Schema(
@@ -15,15 +13,13 @@ export const RepositorySchema = new Mongoose.Schema(
     issues: { type: String, required: true },
     avgAge: { type: String, required: true },
     stdAge: { type: String, required: true },
-    createdAt: { type: String, required: true },
-    updateAt: { type: String, required: true },
   },
   {
     timestamps: true,
   }
 );
 
-export const RepositoryModel = Mongoose.model<IRepository>(
+export const Repository = Mongoose.model<IRepository>(
   "repositories",
   RepositorySchema
 );

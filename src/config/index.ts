@@ -14,12 +14,6 @@ export interface IDataConfiguration {
   connectionString: string;
 }
 
-export function getDatabaseConfig(): IDataConfiguration {
-  return {
-    connectionString: process.env.DB_CONNECTION,
-  };
-}
-
 export function getServerConfigs(): IServerConfigurations {
   return {
     // temporario

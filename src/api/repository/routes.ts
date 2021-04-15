@@ -1,6 +1,5 @@
 import * as Hapi from "hapi";
 import RepositoryController from "./repositoryController";
-import { IDatabase } from "../../db";
 import { IServerConfigurations } from "../../config";
 import { HTTP_VERBS } from "../../constants/index";
 
@@ -8,10 +7,9 @@ const { GET } = HTTP_VERBS;
 
 export default function (
   server: Hapi.Server,
-  serverConfigs: IServerConfigurations,
-  database: IDatabase
+  serverConfigs: IServerConfigurations
 ) {
-  const issueController = new RepositoryController(serverConfigs, database);
+  const issueController = new RepositoryController(serverConfigs);
   server.bind(issueController);
 
   server.route({

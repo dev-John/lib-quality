@@ -3,20 +3,8 @@ import { Server, Request, ResponseToolkit } from "@hapi/hapi";
 
 import * as Repository from "./api/repository";
 import { IServerConfigurations } from "./config";
-import { IDatabase } from "./db";
 
-export async function init(
-  configs: IServerConfigurations,
-  database: IDatabase
-): Promise<Server> {
-  // server.route({
-  //   method: "GET",
-  //   path: "/",
-  //   handler: (request: Request, h: ResponseToolkit) => {
-  //     return "Hello World!";
-  //   },
-  // });
-
+export async function init(configs: IServerConfigurations): Promise<Server> {
   try {
     const server: Server = new Server({
       port: 3000,
@@ -29,7 +17,7 @@ export async function init(
       },
     });
 
-    Repository.init(server, configs, database);
+    Repository.init(server, configs);
 
     await server.start();
     console.log("Server running on %s", server.info.uri);
@@ -45,5 +33,3 @@ process.on("unhandledRejection", (err) => {
   console.log(err);
   process.exit(1);
 });
-
-// init();
