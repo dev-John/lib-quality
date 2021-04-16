@@ -2,10 +2,11 @@
   "name": "lib-quality",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "c8 ava",
+    "test:watch": "c8 ava --watch"
   },
   "author": "Jonatas Oliveira",
   "license": "ISC",
@@ -17,10 +18,29 @@
   },
   "dependencies": {
     "@hapi/hapi": "^20.1.2",
-    "hapi": "^18.1.0",
+    "@hapi/inert": "^6.0.3",
+    "@hapi/vision": "^6.0.1",
+    "@octokit/rest": "^18.5.2",
+    "@types/mathjs": "^6.0.11",
+    "ava": "^3.15.0",
+    "c8": "^7.7.1",
+    "dotenv": "^8.2.0",
+    "hapi-swagger": "^14.1.1",
     "joi": "^17.4.0",
+    "mathjs": "^9.3.2",
     "mongoose": "^5.12.3",
     "nodemon": "^2.0.7",
     "qs": "^6.10.1"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    },
+    "nonSemVerExperiments": {
+      "configurableModuleFormat": true
+    },
+    "nodeArguments": [
+      "--loader=ts-node/esm"
+    ]
   }
 }

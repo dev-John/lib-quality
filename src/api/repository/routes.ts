@@ -1,34 +1,30 @@
-import * as Hapi from "hapi";
+import { Server } from "@hapi/hapi";
 import RepositoryController from "./repositoryController";
-import { IDatabase } from "../../db";
 import { IServerConfigurations } from "../../config";
+import { HTTP_VERBS } from "../../constants/index";
 
-export default function (
-  server: Hapi.Server,
-  serverConfigs: IServerConfigurations,
-  database: IDatabase
-) {
-  const issueController = new RepositoryController(serverConfigs, database);
+import * as validators from "./repositoryValidator";
+import { failAction } from "../../utils";
+
+const { GET } = HTTP_VERBS;
+
+export default function (server: Server, serverConfigs: IServerConfigurations) {
+  const issueController = new RepositoryController(serverConfigs);
   server.bind(issueController);
 
   server.route({
-    method: "GET",
+    method: GET,
     path: "/get-repository",
     options: {
       handler: issueController.getRepository,
-      tags: ["api", "users"],
-      description: "Get user info.",
-      plugins: {
-        "hapi-swagger": {
-          responses: {
-            "200": {
-              description: "User founded.",
-            },
-            "401": {
-              description: "Please login.",
-            },
-          },
-        },
+      tags: ["api"], // to bind the route to SWAGGER!
+      description:
+        "Get informations about a repository on github, like openIssues, avgAge and stdAge.",
+      validate: {
+        query: validators.repositoryParamsValidator,
+        headers: validators.repositoryHeadersValidator,
+
+        failAction,
       },
     },
   });

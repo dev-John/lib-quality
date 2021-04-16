@@ -1,12 +1,8 @@
-import * as Hapi from "hapi";
+import { Server } from "@hapi/hapi";
 import Routes from "./routes";
-import { IDatabase } from "../../db";
+
 import { IServerConfigurations } from "../../config";
 
-export function init(
-  server: Hapi.Server,
-  configs: IServerConfigurations,
-  database: IDatabase
-) {
-  Routes(server, configs, database);
+export function init(server: Server, configs: IServerConfigurations) {
+  Routes(server, configs);
 }

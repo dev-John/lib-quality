@@ -1,6 +1,6 @@
 import * as Server from "./server";
-import * as Database from "./db";
 import * as Configs from "./config";
+import { connect } from "./db";
 
 console.log(`Running environment ${process.env.NODE_ENV || "dev"}`);
 
@@ -15,10 +15,11 @@ process.on("unhandledRejection", (reason: any) => {
 });
 
 // Define async start function
-const start = async ({ config, db }) => {
+const start = async ({ config }) => {
   try {
-    const server = await Server.init(config, db);
+    const server = await Server.init(config);
     await server.start();
+    await connect(); // starts db connection
     console.log("Server running at:", server.info.uri);
   } catch (err) {
     console.error("Error starting server: ", err.message);
@@ -26,12 +27,8 @@ const start = async ({ config, db }) => {
   }
 };
 
-// Init Database
-const dbConfigs = Configs.getDatabaseConfig();
-const database = Database.init(dbConfigs);
-
 // Starting Application Server
 const serverConfigs = Configs.getServerConfigs();
 
 // Start the server
-start({ config: serverConfigs, db: database });
+start({ config: serverConfigs });

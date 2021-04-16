@@ -1,22 +1,14 @@
 import qs from "qs";
-import { Server, Request, ResponseToolkit } from "@hapi/hapi";
+import { Server } from "@hapi/hapi";
+import Inert from "@hapi/inert";
+import Vision from "@hapi/vision";
+import HapiSwagger from "hapi-swagger";
 
 import * as Repository from "./api/repository";
 import { IServerConfigurations } from "./config";
-import { IDatabase } from "./db";
+import { swaggerOptions } from "./config/swagger";
 
-export async function init(
-  configs: IServerConfigurations,
-  database: IDatabase
-): Promise<Server> {
-  // server.route({
-  //   method: "GET",
-  //   path: "/",
-  //   handler: (request: Request, h: ResponseToolkit) => {
-  //     return "Hello World!";
-  //   },
-  // });
-
+export async function init(configs: IServerConfigurations): Promise<Server> {
   try {
     const server: Server = new Server({
       port: 3000,
@@ -29,10 +21,16 @@ export async function init(
       },
     });
 
-    Repository.init(server, configs, database);
+    await server.register([
+      Inert,
+      Vision,
+      {
+        plugin: HapiSwagger,
+        options: swaggerOptions,
+      },
+    ]);
 
-    await server.start();
-    console.log("Server running on %s", server.info.uri);
+    Repository.init(server, configs);
 
     return server;
   } catch (error) {
@@ -45,5 +43,3 @@ process.on("unhandledRejection", (err) => {
   console.log(err);
   process.exit(1);
 });
-
-// init();
