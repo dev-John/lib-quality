@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
-    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/index.ts",
+    "start": "NODE_PATH=./build node build/index.js",
+    "build": "tsc -p .",
+    "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/index.ts",
     "test": "c8 ava",
     "test:watch": "c8 ava --watch"
   },
