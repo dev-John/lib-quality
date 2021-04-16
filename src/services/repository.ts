@@ -8,12 +8,6 @@ export async function getIssuesInfo({
   repo,
   authorization,
 }): Promise<any> {
-  console.log(
-    "🚀 ~ file: repository.ts ~ line 11 ~ authorization",
-    authorization
-  );
-  console.log("🚀 ~ file: repository.ts ~ line 11 ~ repo", repo);
-  console.log("🚀 ~ file: repository.ts ~ line 11 ~ owner", owner);
   const octokit = new Octokit({ auth: authorization });
   const concatedRepo = `${owner + "/" + repo}`;
 

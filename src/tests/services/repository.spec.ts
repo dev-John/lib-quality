@@ -27,9 +27,9 @@ test.serial("getIssuesInfo | get issues info | pass test", async (t) => {
     authorization,
   });
 
-  t.assert(openIssues, "openIssues should have been brought");
-  t.assert(avgAge, "avgAge should have been brought");
-  t.assert(stdAge, "stdAge should have been brought");
+  t.assert(Number.isInteger(openIssues), "openIssues should have been brought");
+  t.assert(Number.isInteger(avgAge), "avgAge should have been brought");
+  t.assert(Number.isInteger(stdAge), "stdAge should have been brought");
 });
 
 test.serial(
