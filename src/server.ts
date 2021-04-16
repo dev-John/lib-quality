@@ -1,8 +1,12 @@
 import qs from "qs";
-import { Server, Request, ResponseToolkit } from "@hapi/hapi";
+import { Server } from "@hapi/hapi";
+import Inert from "@hapi/inert";
+import Vision from "@hapi/vision";
+import HapiSwagger from "hapi-swagger";
 
 import * as Repository from "./api/repository";
 import { IServerConfigurations } from "./config";
+import { swaggerOptions } from "./config/swagger";
 
 export async function init(configs: IServerConfigurations): Promise<Server> {
   try {
@@ -16,6 +20,15 @@ export async function init(configs: IServerConfigurations): Promise<Server> {
         },
       },
     });
+
+    await server.register([
+      Inert,
+      Vision,
+      {
+        plugin: HapiSwagger,
+        options: swaggerOptions,
+      },
+    ]);
 
     Repository.init(server, configs);
 
