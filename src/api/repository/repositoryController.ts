@@ -18,7 +18,7 @@ export default class RepositoryController {
       const { owner, repo } = request.query;
       const { authorization } = request.headers;
 
-      const { openIssues } = await getIssuesInfo({
+      const data = await getIssuesInfo({
         owner,
         repo,
         authorization,
@@ -29,7 +29,7 @@ export default class RepositoryController {
         repository: `${owner + "/" + repo}`,
       });
 
-      return h.response({ status: RESPONSE_STATUS.SUCCESS, openIssues });
+      return h.response({ status: RESPONSE_STATUS.SUCCESS, data });
     } catch (error) {
       return h
         .response({ status: RESPONSE_STATUS.FAIL, message: error.message })

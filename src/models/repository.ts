@@ -12,9 +12,9 @@ export interface IRepository extends Mongoose.Document {
 export const RepositorySchema = new Mongoose.Schema(
   {
     name: { type: String, required: true },
-    issues: { type: String, required: true },
-    avgAge: { type: String, required: true },
-    stdAge: { type: String, required: true },
+    issues: { type: Number, required: true },
+    avgAge: { type: Number, required: true },
+    stdAge: { type: Number, required: true },
   },
   {
     timestamps: true,

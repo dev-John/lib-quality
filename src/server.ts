@@ -19,9 +19,6 @@ export async function init(configs: IServerConfigurations): Promise<Server> {
 
     Repository.init(server, configs);
 
-    await server.start();
-    console.log("Server running on %s", server.info.uri);
-
     return server;
   } catch (error) {
     console.log("Error starting server: ", error);
