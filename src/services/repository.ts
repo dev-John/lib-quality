@@ -8,6 +8,12 @@ export async function getIssuesInfo({
   repo,
   authorization,
 }): Promise<any> {
+  console.log(
+    "🚀 ~ file: repository.ts ~ line 11 ~ authorization",
+    authorization
+  );
+  console.log("🚀 ~ file: repository.ts ~ line 11 ~ repo", repo);
+  console.log("🚀 ~ file: repository.ts ~ line 11 ~ owner", owner);
   const octokit = new Octokit({ auth: authorization });
   const concatedRepo = `${owner + "/" + repo}`;
 
@@ -51,7 +57,7 @@ export async function getIssuesInfo({
     });
 
     const avgAge = sum(timeToClose) / timeToClose.length || 0;
-    const stdAge = std(timeToClose);
+    const stdAge = timeToClose.length !== 0 ? std(timeToClose) : 0;
 
     await upsertRepository({
       repo: concatedRepo,
@@ -82,6 +88,6 @@ async function upsertRepository({
   await Repository.findOneAndUpdate(query, update, options);
 }
 
-async function getRepoInfoFromDb(repo): Promise<IRepository> {
+export async function getRepoInfoFromDb(repo): Promise<IRepository> {
   return Repository.findOne({ name: repo });
 }
