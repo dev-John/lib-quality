@@ -48,7 +48,7 @@ An API for collecting and presenting data about Github Repositories
 
 **To access the Github API you need a personal Access Token to be sent in the headers.** See how to generate one [HERE](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
 
-Example sending the token on the request:
+Example of sending the token on the request:
 
 on Postman:
 
