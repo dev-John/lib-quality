@@ -11,8 +11,8 @@ import { swaggerOptions } from "./config/swagger";
 export async function init(configs: IServerConfigurations): Promise<Server> {
   try {
     const server: Server = new Server({
-      port: 3000,
-      host: "0.0.0.0",
+      port: process.env.PORT || 3000,
+      // host: "0.0.0.0",
       query: { parser: (query) => qs.parse(query) },
       routes: {
         cors: {
