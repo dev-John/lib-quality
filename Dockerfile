@@ -1,12 +1,10 @@
-FROM node:latest as base
+FROM node:14 as base
 
 WORKDIR /home/node/app
 
 COPY package*.json ./
 
-RUN npm install
-
-# RUN npm ci --only=production
+RUN npm i
 
 COPY . .
 

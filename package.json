@@ -2,12 +2,11 @@
   "name": "lib-quality",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
     "start": "NODE_PATH=./build node build/index.js",
     "build": "tsc -p .",
-    "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/index.ts",
+    "dev": "nodemon src/index.ts",
     "test": "c8 ava",
     "test:watch": "c8 ava --watch"
   },
@@ -16,6 +15,8 @@
   "devDependencies": {
     "@types/hapi__hapi": "^20.0.6",
     "@types/node": "^14.14.37",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.4"
   },
@@ -32,7 +33,6 @@
     "joi": "^17.4.0",
     "mathjs": "^9.3.2",
     "mongoose": "^5.12.3",
-    "nodemon": "^2.0.7",
     "qs": "^6.10.1"
   },
   "ava": {

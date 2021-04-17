@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   lib-quality:
@@ -7,10 +7,11 @@ services:
       dockerfile: Dockerfile
       target: base
     volumes:
-      - ./src:/home/node/app/src      
+      - ./src:/home/node/app/src
+      - ./nodemon.json:/home/node/app/nodemon.json
     container_name: lib-quality
     expose:
-      - '3000'
+      - "3000"
     ports:
-      - '3000:3000'
+      - "3000:3000"
     command: npm run dev

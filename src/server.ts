@@ -12,7 +12,7 @@ export async function init(configs: IServerConfigurations): Promise<Server> {
   try {
     const server: Server = new Server({
       port: 3000,
-      host: "localhost",
+      host: "0.0.0.0",
       query: { parser: (query) => qs.parse(query) },
       routes: {
         cors: {
