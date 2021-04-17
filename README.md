@@ -4,7 +4,9 @@
 
 - [About](#about)
 - [Project Structure](#structure)
+- [Github Personal Access Token](#access_token)
 - [Running locally](#run_locally)
+- [Swagger Documentation](#docs)
 - [Tests](#tests)
 
 ## About <a name = "about"></a>
@@ -39,15 +41,38 @@ An API for collecting and presenting data about Github Repositories
 │   └───server.ts -> Server configurations
 ```
 
+## [IMPORTANT] Github Personal Access Token <a name = "access_token"></a>
+
+## Running Locally <a name = "run_locally"></a>
+
+**To access the Github API you need a personal Access Token to be sent in the headers.** See how to generate one [HERE](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
+
+Example sending the token on the request:
+
+on Postman:
+
+<img src="https://user-images.githubusercontent.com/28464939/115126224-e1b2a900-9fa3-11eb-8f0a-96db8e224fa3.png" />
+
+on Swagger:
+
+<img src="https://user-images.githubusercontent.com/28464939/115126280-3e15c880-9fa4-11eb-9722-a1fa68700078.png" />
+
 ## Running Locally <a name = "run_locally"></a>
 
 You will need NodeJS (V. 14 or +) and Docker
 
-Don't worry, a local Mongodb will run on a docker container.
+Clone this repo and run the following commands:
+
+<!-- Don't worry, a local Mongodb will run on a docker container. -->
 
 ```
+npm install
 docker-compose up
 ```
+
+## Swagger Documentation <a name = "docs"></a>
+
+After running the project open the browser in http://localhost:3000/documentation
 
 ## Unit tests <a name = "tests"></a>
 
