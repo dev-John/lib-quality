@@ -1,16 +1,14 @@
 import test from "ava";
-import { connect } from "../../db/index";
+import * as inMemoryDb from "../_in-memory-db";
 import { registerSearch } from "../../services/serch";
-import { SearchPool } from "../../models/searchPool";
-
-let registers = [];
 
 test.before(async () => {
-  await connect();
+  await inMemoryDb.connect();
 });
 
 test.after.always(async () => {
-  await SearchPool.deleteMany({ _id: registers });
+  await inMemoryDb.clearDatabase();
+  await inMemoryDb.disconnect();
 });
 
 test("registerSearch | register a search on the searchPool | pass test", async (t) => {
@@ -18,8 +16,6 @@ test("registerSearch | register a search on the searchPool | pass test", async (
     user: "testusertokenkskdjfaiahef",
     repository: "facebook/react",
   });
-
-  registers.push(register._id);
 
   t.assert(register, "The register should have been created");
 });
