@@ -81,3 +81,15 @@ For the unit tests, the project uses an [In Memory Mongodb Server](https://githu
 ```
 npm test
 ```
+
+## Tecnologies used <a name = "techs"></a>
+
+[NodeJs](https://nodejs.org/en/) - Server Environment
+
+[Hapi](https://hapi.dev) - Server Framework
+
+[Docker](https://www.docker.com) - Image deployment
+
+[AVA](https://github.com/avajs/ava) - Test Framework
+
+[Joi](https://joi.dev) - Schema description language and data validator
