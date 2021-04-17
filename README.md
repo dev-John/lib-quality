@@ -60,7 +60,7 @@ on Swagger:
 
 ## Running Locally <a name = "run_locally"></a>
 
-You will need NodeJS (V. 14 or +) and Docker
+You will need NodeJS (V. 14 or +), npm, Docker and docker-compose
 
 Clone this repo and run the following commands:
 
