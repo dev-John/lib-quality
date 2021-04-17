@@ -14,4 +14,16 @@ services:
       - "3000"
     ports:
       - "3000:3000"
+    depends_on:
+      - lib-quality-db
+    links:
+      - lib-quality-db
     command: npm run dev
+
+  lib-quality-db:
+    image: mongo
+    container_name: lib-quality-db
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"

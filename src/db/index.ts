@@ -4,23 +4,14 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export function connect() {
-  const dbConfig = {
-    dbName: process.env.MONGO_DB_NAME,
+  const localMongoDb = "mongodb://lib-quality-db:27017/lib-quality"; // only for local env, runs on docker
 
-    auth: {
-      user: process.env.MONGO_USER,
-      password: process.env.MONGO_PWD,
-    },
-
+  return mongoose.connect(localMongoDb, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
     connectTimeoutMS: 10000,
-  };
-
-  const mongoUrl = process.env.MONGO_URL;
-
-  return mongoose.connect(mongoUrl, dbConfig);
+  });
 }
 
 export function disconnect() {
