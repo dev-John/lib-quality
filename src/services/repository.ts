@@ -23,6 +23,7 @@ export async function getIssuesInfo({
       stdAge: round(dbRepo.stdAge, 2),
     };
   } else {
+    // I used the Github Octokit lib to simplify the access to their API https://developer.github.com/v3/
     const result = await octokit.rest.issues.listForRepo({
       owner,
       repo,
@@ -51,7 +52,7 @@ export async function getIssuesInfo({
     });
 
     const avgAge = sum(timeToClose) / timeToClose.length || 0;
-    const stdAge = std(timeToClose);
+    const stdAge = timeToClose.length !== 0 ? std(timeToClose) : 0;
 
     await upsertRepository({
       repo: concatedRepo,
@@ -82,6 +83,6 @@ async function upsertRepository({
   await Repository.findOneAndUpdate(query, update, options);
 }
 
-async function getRepoInfoFromDb(repo): Promise<IRepository> {
+export async function getRepoInfoFromDb(repo): Promise<IRepository> {
   return Repository.findOne({ name: repo });
 }
