@@ -23,7 +23,8 @@ export async function getIssuesInfo({
       stdAge: round(dbRepo.stdAge, 2),
     };
   } else {
-    // I used the Github Octokit lib to simplify the access to their API https://developer.github.com/v3/
+    // I used the Github Octokit (https://docs.github.com/en/rest/overview/libraries)
+    // lib to simplify the access to their API https://developer.github.com/v3/
     const result = await octokit.rest.issues.listForRepo({
       owner,
       repo,
