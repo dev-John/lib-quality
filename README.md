@@ -71,6 +71,10 @@ npm install
 docker-compose up
 ```
 
+Then you can access the API in http://localhost:3000 or http://0.0.0.0:3000
+
+See the Docs on Swagger for informations about the routes, params and headers
+
 ## Swagger Documentation <a name = "docs"></a>
 
 After running the project open the browser in http://localhost:3000/documentation
