@@ -8,6 +8,7 @@
 - [Running locally](#run_locally)
 - [Swagger Documentation](#docs)
 - [Tests](#tests)
+- [Tecnologies](#techs)
 
 ## About <a name = "about"></a>
 
@@ -87,6 +88,10 @@ npm test
 [NodeJs](https://nodejs.org/en/) - Server Environment
 
 [Hapi](https://hapi.dev) - Server Framework
+
+[Mongodb](https://www.mongodb.com) - Cloud NoSQL Database
+
+[Mongodb in memory](https://github.com/nodkz/mongodb-memory-server) - In memory database for testing purpose
 
 [Docker](https://www.docker.com) - Image deployment
 
