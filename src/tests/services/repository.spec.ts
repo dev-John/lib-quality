@@ -1,18 +1,18 @@
 import test from "ava";
-import { connect } from "../../db/index";
+import * as inMemoryDb from "../_in-memory-db";
 import { getIssuesInfo, getRepoInfoFromDb } from "../../services/repository";
 
 import dotenv from "dotenv";
-import { Repository } from "../../models/repository";
 
 dotenv.config();
 
 test.before(async () => {
-  await connect();
+  await inMemoryDb.connect();
 });
 
 test.after.always(async () => {
-  await Repository.deleteOne({ name: owner + "/" + repo });
+  await inMemoryDb.clearDatabase();
+  await inMemoryDb.disconnect();
 });
 
 // I used a repo of mine to test...
